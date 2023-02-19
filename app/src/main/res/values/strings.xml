@@ -9,5 +9,10 @@
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
+    <string name="button_download">Download</string>
     <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="glide_radio_button">Glide</string>
+    <string name="loadApp_radio_button">LoadApp</string>
+    <string name="retrofit_radio_button">Retrofit</string>
 </resources>

@@ -11,9 +11,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
+import com.esraa.egfwd.loadapp.databinding.ActivityMainBinding
+import com.esraa.egfwd.loadapp.databinding.ContentMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private var downloadID: Long = 0
 
@@ -23,12 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        val customButton = findViewById<LoadingButton>(R.id.custom_button)
-        customButton.setOnClickListener {
+        binding.contentMain.customButton
+            .setOnClickListener {
             download()
         }
     }
