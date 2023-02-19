@@ -12,6 +12,9 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -22,7 +25,7 @@ import com.esraa.egfwd.loadapp.utils.sendNotification
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+     lateinit var binding: ActivityMainBinding
 
     private var downloadID: Long = 0
 
@@ -46,7 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.contentMain.customButton
             .setOnClickListener {
-            download()
+                if(getUrl()==""){
+                    Toast.makeText(this, resources.getString(R.string.download_toast), Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    download()
+                }
         }
     }
 
@@ -66,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun download() {
         val request =
-            DownloadManager.Request(Uri.parse(URL))
+            DownloadManager.Request(Uri.parse(getUrl()))
                 .setTitle(getString(R.string.app_name))
                 .setDescription(getString(R.string.app_description))
                 .setRequiresCharging(false)
@@ -78,11 +86,21 @@ class MainActivity : AppCompatActivity() {
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
     }
 
-    companion object {
-        private const val URL =
-            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
-        private const val CHANNEL_ID = "channelId"
+    private fun getUrl() : String {
+        var url = ""
+
+        val radioGroup = binding.contentMain.radioGroup
+        val checkedRBId = radioGroup.checkedRadioButtonId
+        val checkedRadioButton : RadioButton? = radioGroup.findViewById(checkedRBId)
+        when(checkedRadioButton?.text) {
+            resources.getString(R.string.glide_radio_button) -> url = resources.getString(R.string.glide_radio_button_url)
+            resources.getString(R.string.loadApp_radio_button) -> url = resources.getString(R.string.loadApp_radio_button_url)
+            resources.getString(R.string.retrofit_radio_button) -> url = resources.getString(R.string.retrofit_radio_button_url)
+        }
+
+        return url
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createChannel(channelId: String, channelName: String) {

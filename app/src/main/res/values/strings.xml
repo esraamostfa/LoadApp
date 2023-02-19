@@ -4,9 +4,16 @@
     <string name="action_settings">Settings</string>
 
     <string name="notification_channel_id">Download</string>
-    <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
+    <string name="notification_title">Udacity: Android Kotlin Nanodegree+</string>
     <string name="notification_description">The Project 3 repository is downloaded</string>
+    <string name="notification_title_glide">Udacity: Android Kotlin Nanodegree+</string>
+    <string name="notification_title_retrofit">Udacity: Android Kotlin Nanodegree+</string>
+    <string name="notification_description_glide">The Project 3 repository is downloaded</string>
+    <string name="notification_description_retrofit">The Project 3 repository is downloaded</string>
+
+
     <string name="notification_button">See changes</string>
+    <string name="download_toast">Please select the file to download!</string>
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
@@ -14,6 +21,9 @@
     <string name="title_activity_detail">DetailActivity</string>
 
     <string name="glide_radio_button">Glide</string>
+    <string name="glide_radio_button_url">https://github.com/bumptech/glide</string>
     <string name="loadApp_radio_button">LoadApp</string>
+    <string name="loadApp_radio_button_url">https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter</string>
     <string name="retrofit_radio_button">Retrofit</string>
+    <string name="retrofit_radio_button_url">https://github.com/square/retrofit</string>
 </resources>
