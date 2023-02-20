@@ -12,7 +12,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -30,9 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var downloadID: Long = 0
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
 
+    private var  checkedRadioButton : RadioButton? = null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +61,11 @@ class MainActivity : AppCompatActivity() {
             val id = intent?.getIntExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             //get an instance of NotificationManager and call sendNotification
-            val notificationManager = ContextCompat.getSystemService(
+            notificationManager = ContextCompat.getSystemService(
                 context,
                 NotificationManager::class.java
             ) as NotificationManager
-            notificationManager.sendNotification(context.getString(R.string.notification_description), context, id?:0)
+            notificationManager.sendNotification(context.getString(R.string.notification_description), context, id?:0, downloadID, DownloadManager.EXTRA_DOWNLOAD_ID)
 
         }
     }
@@ -75,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     private fun download() {
         val request =
             DownloadManager.Request(Uri.parse(getUrl()))
-                .setTitle(getString(R.string.app_name))
+                .setTitle(checkedRadioButton?.text)
                 .setDescription(getString(R.string.app_description))
                 .setRequiresCharging(false)
                 .setAllowedOverMetered(true)
@@ -84,14 +82,16 @@ class MainActivity : AppCompatActivity() {
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         downloadID =
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+
     }
+
 
     private fun getUrl() : String {
         var url = ""
 
         val radioGroup = binding.contentMain.radioGroup
         val checkedRBId = radioGroup.checkedRadioButtonId
-        val checkedRadioButton : RadioButton? = radioGroup.findViewById(checkedRBId)
+         checkedRadioButton= radioGroup.findViewById(checkedRBId)
         when(checkedRadioButton?.text) {
             resources.getString(R.string.glide_radio_button) -> url = resources.getString(R.string.glide_radio_button_url)
             resources.getString(R.string.loadApp_radio_button) -> url = resources.getString(R.string.loadApp_radio_button_url)

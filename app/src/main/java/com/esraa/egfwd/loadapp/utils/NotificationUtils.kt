@@ -15,8 +15,7 @@ import com.esraa.egfwd.loadapp.R
 
 private const val REQUEST_CODE = 0
 
-
-fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context, id: Int) {
+fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context, id: Int, downloadId: Long, downloadIdExtra: String) {
     // Create the content intent for the notification, which launches
     // this activity
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
@@ -42,6 +41,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     //add action
     val changesIntent = Intent(applicationContext, DetailActivity::class.java)
+    changesIntent.putExtra(downloadIdExtra, downloadId)
     val changesPendingIntent: PendingIntent = PendingIntent.getActivity(
         applicationContext,
         REQUEST_CODE,
