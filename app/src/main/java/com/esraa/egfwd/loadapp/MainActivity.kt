@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.notification_channel_id)
         )
 
-        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-
         binding.contentMain.customButton
             .setOnClickListener {
                 if(getUrl()==""){
@@ -61,7 +59,30 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
+        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
     }
+
+    private fun download() {
+
+        val request =
+            DownloadManager.Request(Uri.parse(getUrl()))
+                .setTitle(checkedRadioButton?.text)
+                .setDescription(getString(R.string.app_description))
+                .setRequiresCharging(false)
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(true)
+
+        downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        downloadID =
+            downloadManager.enqueue(request) // enqueue puts the download request in the queue.
+
+        binding.contentMain.customButton.setButtonStatus(ButtonState.LOADING)
+        downloading = true
+
+        getDownloadProgress()
+    }
+
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
@@ -77,26 +98,6 @@ class MainActivity : AppCompatActivity() {
             binding.contentMain.customButton.setButtonStatus(ButtonState.COMPLETED)
             downloading = false
         }
-    }
-
-    private fun download() {
-
-        val request =
-            DownloadManager.Request(Uri.parse(getUrl()))
-                .setTitle(checkedRadioButton?.text)
-                .setDescription(getString(R.string.app_description))
-                .setRequiresCharging(false)
-                .setAllowedOverMetered(true)
-                .setAllowedOverRoaming(true)
-
-         downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        downloadID =
-            downloadManager.enqueue(request) // enqueue puts the download request in the queue.
-
-        binding.contentMain.customButton.setButtonStatus(ButtonState.LOADING)
-        downloading = true
-
-        getDownloadProgress()
     }
 
     private fun getDownloadProgress() {

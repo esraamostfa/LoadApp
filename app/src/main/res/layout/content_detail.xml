@@ -29,6 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/basic_margin"
             android:layout_marginStart="@dimen/basic_margin"
+            android:layout_marginEnd="@dimen/basic_margin"
+            android:maxLines="2"
             tools:text="TextView"
             android:textColor="@color/teal_700"
             app:layout_constraintEnd_toEndOf="parent"
