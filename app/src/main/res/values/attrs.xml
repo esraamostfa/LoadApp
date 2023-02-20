@@ -2,5 +2,8 @@
 <resources>
     <declare-styleable name="LoadingButton">
         <attr name="buttonText" format="string"/>
+        <attr name="downloadState" format="string"/>
+        <attr name="loadingAngle" format="float"/>
+        <attr name="progressWidth" format="float"/>
          </declare-styleable>
 </resources>
