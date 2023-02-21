@@ -30,12 +30,12 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     //add style
     //load image source
-    val eggImage = BitmapFactory.decodeResource(
+    val downloadImage = BitmapFactory.decodeResource(
         applicationContext.resources,
-        R.drawable.ic_launcher_foreground
+        R.drawable.baseline_cloud_download_48
     )
     val bigPicStyle = NotificationCompat.BigPictureStyle()
-        .bigPicture(eggImage)
+        .bigPicture(downloadImage)
         .bigLargeIcon(null)
 
 
@@ -56,7 +56,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     )
 
         //set title, text and icon to builder
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setSmallIcon(R.drawable.baseline_cloud_download_48)
         .setContentTitle(applicationContext
             .getString(R.string.notification_title))
         .setContentText(messageBody)
@@ -64,10 +64,10 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setAutoCancel(true)
         //add style
         .setStyle(bigPicStyle)
-        .setLargeIcon(eggImage)
+        .setLargeIcon(downloadImage)
         //add action
         .addAction(
-            R.drawable.ic_launcher_foreground,
+            R.drawable.baseline_cloud_download_48,
             applicationContext.getString(R.string.notification_button),
             changesPendingIntent
         )
