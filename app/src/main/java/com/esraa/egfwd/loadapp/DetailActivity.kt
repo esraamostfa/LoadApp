@@ -1,6 +1,6 @@
 package com.esraa.egfwd.loadapp
 
-import android.app.Activity
+import android.R
 import android.app.DownloadManager
 import android.app.NotificationManager
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import com.esraa.egfwd.loadapp.databinding.ActivityDetailBinding
 
@@ -22,6 +23,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
@@ -45,6 +47,10 @@ class DetailActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
+
+        val motionLayout = binding.detailContent.motionBase
+        motionLayout.transitionToEnd()
+
     }
 
 
