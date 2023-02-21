@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motion_base"
         android:layout_width="match_parent"
@@ -47,6 +43,7 @@
             android:paddingTop="@dimen/basic_margin"
             android:layout_marginStart="@dimen/basic_margin"
             android:layout_marginTop="@dimen/basic_margin"
+            android:layout_marginEnd="@dimen/basic_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/file_name_label"/>
 

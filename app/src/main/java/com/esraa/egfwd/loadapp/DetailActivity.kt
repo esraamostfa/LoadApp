@@ -47,10 +47,6 @@ class DetailActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
-
-        val motionLayout = binding.detailContent.motionBase
-        motionLayout.transitionToEnd()
-
     }
 
 
